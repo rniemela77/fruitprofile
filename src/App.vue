@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, computed, watch, ref } from "vue";
 import { RouterView } from "vue-router";
 import { useInventoryStore } from "@/stores/inventory";
 import { useCartStore } from "@/stores/cart";
@@ -82,6 +82,15 @@ const fetchItems = async () => {
 const cartQuantity = computed(() => {
   return cartStore.itemsInCart.length;
 });
+
+const cartAnimation = ref(false);
+watch(() => {
+  console.log("changing cart state: ", cartStore.itemsInCart.length);
+  cartAnimation.value = true;
+  setTimeout(() => {
+    cartAnimation.value = false;
+  }, 500);
+});
 </script>
 
 <template>
@@ -90,7 +99,9 @@ const cartQuantity = computed(() => {
       <h1>FruitShop</h1>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/cart">Cart({{ cartQuantity }})</RouterLink>
+        <RouterLink to="/cart" :class="{ 'cart-animation': cartAnimation }">
+          Cart({{ cartQuantity }})
+        </RouterLink>
       </nav>
     </div>
   </header>
@@ -99,7 +110,6 @@ const cartQuantity = computed(() => {
 
 <style>
 @import "@/assets/base.css";
-
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -142,5 +152,19 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.cart-animation {
+  animation: cartAnimation 0.5s;
+}
+@keyframes cartAnimation {
+  0% {
+    filter: brightness(2);
+    text-shadow: 0px 0px 10px var(--green-medium);
+  }
+  100% {
+    filter: brightness(1);
+    text-shadow: 0px 0px 0px var(--green-medium);
+  }
 }
 </style>
