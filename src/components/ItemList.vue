@@ -11,12 +11,14 @@ const props = defineProps({
 
 <template>
   <div class="item-thumbs">
-    <ItemThumb
-      v-for="item in props.items"
-      :key="item.id"
-      :item="item"
-      class="item-thumb"
-    />
+    <transition-group name="list">
+      <ItemThumb
+        v-for="item in props.items"
+        :key="item.id"
+        :item="item"
+        class="item-thumb"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -29,5 +31,15 @@ const props = defineProps({
 }
 .item-thumb {
   padding: 2rem;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.25s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
