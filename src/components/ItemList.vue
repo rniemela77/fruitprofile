@@ -26,6 +26,6 @@ const props = defineProps({
   flex-wrap: wrap;
 }
 .item-thumb {
-  padding: 1rem;
+  padding: 2rem;
 }
 </style>
