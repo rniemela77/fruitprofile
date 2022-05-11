@@ -122,4 +122,11 @@ const filtersStore = useFiltersStore();
 input {
   accent-color: var(--green-medium);
 }
+
+@media screen and (max-width: 500px) {
+  .filters {
+    width: 100%;
+    max-width: unset;
+  }
+}
 </style>
