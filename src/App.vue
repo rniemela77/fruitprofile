@@ -1,9 +1,11 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { RouterView } from "vue-router";
 import { useInventoryStore } from "@/stores/inventory";
+import { useCartStore } from "@/stores/cart";
 
 const inventoryStore = useInventoryStore();
+const cartStore = useCartStore();
 
 onMounted(() => {
   console.log("mounted");
@@ -40,6 +42,10 @@ const fetchItems = () => {
       inventoryStore.items = sheetData;
     });
 };
+
+const cartQuantity = computed(() => {
+  return cartStore.itemsInCart.length;
+});
 </script>
 
 <template>
@@ -51,7 +57,7 @@ const fetchItems = () => {
         <!-- <RouterLink to="/">Home</RouterLink> -->
         <!-- <RouterLink to="/about">About</RouterLink> -->
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/cart">Cart</RouterLink>
+        <RouterLink to="/cart">Cart({{ cartQuantity }})</RouterLink>
       </nav>
     </div>
   </header>
