@@ -12,6 +12,7 @@ const filtersStore = useFiltersStore();
   <div class="filters">
     <div class="filter-group">
       <h2 for="textSearch">Search by keyword</h2>
+
       <input
         type="text"
         id="textSearch"
@@ -22,6 +23,7 @@ const filtersStore = useFiltersStore();
 
     <div class="filter-group">
       <h2>Tags</h2>
+
       <div class="tags">
         <div class="tag" v-for="tag in filtersStore.tags" :key="tag">
           <input
@@ -37,10 +39,12 @@ const filtersStore = useFiltersStore();
 
     <div class="filter-group">
       <h2>Price</h2>
-      <div>
+
+      <div class="price-option">
         <label for="minPrice">
-          Min Price: ${{ filtersStore.selected.minPrice }}</label
-        >
+          <span>Min Price:</span>
+          <span>${{ filtersStore.selected.minPrice }}</span>
+        </label>
         <input
           type="range"
           id="minPrice"
@@ -49,10 +53,12 @@ const filtersStore = useFiltersStore();
           v-model="filtersStore.selected.minPrice"
         />
       </div>
-      <div>
+
+      <div class="price-option">
         <label for="maxPrice">
-          Max Price: ${{ filtersStore.selected.maxPrice }}</label
-        >
+          <span>Max Price:</span>
+          <span>${{ filtersStore.selected.maxPrice }} </span>
+        </label>
         <input
           type="range"
           id="maxPrice"
@@ -78,9 +84,6 @@ const filtersStore = useFiltersStore();
 .filter-group:not(:last-of-type) {
   border-bottom: 1px solid rgba(0, 189, 126, 0.24);
 }
-.filter-group label {
-  margin-right: 0.25rem;
-}
 .filter-group input[type="text"] {
   padding: 0.25rem;
   font-size: 16px;
@@ -91,6 +94,13 @@ const filtersStore = useFiltersStore();
 }
 .tag input {
   display: none;
+}
+.price-option label {
+  display: flex;
+  justify-content: space-between;
+}
+.price-option input {
+  width: 100%;
 }
 .tag label {
   padding: 0.25rem 0.5rem;
