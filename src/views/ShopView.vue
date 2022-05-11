@@ -5,10 +5,8 @@ import ItemList from "@/components/ItemList.vue";
 import { computed } from "vue";
 
 import { useInventoryStore } from "@/stores/inventory";
-// import { useCartStore } from "@/stores/cart";
 import { useFiltersStore } from "@/stores/filters";
 const inventoryStore = useInventoryStore();
-// const cartStore = useCartStore();
 const filtersStore = useFiltersStore();
 
 const filteredItems = computed(() => {
@@ -41,12 +39,23 @@ const filteredItems = computed(() => {
   <main>
     <FiltersControl class="filters" />
 
-    <ItemList :items="filteredItems" />
+    <ItemList v-if="filteredItems.length" :items="filteredItems" />
+
+    <div v-else class="no-items-message">
+      <p>No matching items.</p>
+    </div>
   </main>
 </template>
 
 <style scoped>
 main {
   display: flex;
+}
+.no-items-message {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  margin: 3rem 0;
 }
 </style>
