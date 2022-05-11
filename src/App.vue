@@ -1,6 +1,40 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
+
+onMounted(async () => {
+  // Get URL of google spreadsheet. Refer to https://asbnotebook.com/fetch-google-spread-sheet-data-using-javascript/
+  const sheetId = "1UTsgtcRiKEn4vjHSXIN7URM9x6n7aKJNWOgmsSKTBzE";
+  const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
+  const sheetName = "user-data";
+  const query = encodeURIComponent("Select *");
+  const url = `${base}&sheet=${sheetName}&tq=${query}`;
+
+  // Fetch all of the rows from the spreadsheet (starting at row 2)
+  fetch(url)
+    .then((res) => res.text())
+    .then((res) => {
+      // Extract row data from the spreadsheet (starting at row 2)
+      const jsonData = JSON.parse(res.substring(47).slice(0, -2));
+      const cols = jsonData.table.cols;
+      const rows = jsonData.table.rows;
+
+      // Create array of objects (with key of column name and value of column data)
+      const sheetData = rows.map((row) => {
+        const obj = {};
+        row.c.forEach((cell, i) => {
+          obj[cols[i].label] = cell.v;
+        });
+        return obj;
+      });
+      data.value = sheetData;
+    });
+});
+
+const data = ref(null);
+const loading = ref(true);
+const error = ref(null);
 </script>
 
 <template>
@@ -14,11 +48,14 @@ import HelloWorld from "@/components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <!-- <HelloWorld msg="You did it!" /> -->
+      {{ data }}
+      {{ loading }}
+      {{ error }}
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <!-- <RouterLink to="/">Home</RouterLink> -->
+        <!-- <RouterLink to="/about">About</RouterLink> -->
       </nav>
     </div>
   </header>
