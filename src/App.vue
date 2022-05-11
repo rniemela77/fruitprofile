@@ -83,6 +83,7 @@ const cartQuantity = computed(() => {
   return cartStore.itemsInCart.length;
 });
 
+// Trigger an animation when items are added or removed from the cart
 const cartAnimation = ref(false);
 watch(() => {
   console.log("changing cart state: ", cartStore.itemsInCart.length);
