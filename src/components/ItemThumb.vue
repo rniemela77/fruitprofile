@@ -32,8 +32,16 @@ const props = defineProps({
 }
 img {
   object-fit: cover;
+  display: block;
+  transition: 0.25s;
+  border: 1px solid var(--green-dark);
 }
 h2 {
   margin: 1rem 0;
+}
+.thumb:hover img {
+  box-shadow: 6px 6px 0px var(--green-dark);
+  transform: translate(-3px, -3px);
+  border: 1px solid var(--green-medium);
 }
 </style>
