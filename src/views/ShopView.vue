@@ -28,8 +28,9 @@ const itemIsInCart = (itemId) => {
 const filteredItems = computed(() => {
   return inventoryStore.items.filter((item) => {
     return (
-      item.price >= filtersStore.price.minPrice &&
-      item.price <= filtersStore.price.maxPrice
+      item.price >= filtersStore.selected.minPrice &&
+      item.price <= filtersStore.selected.maxPrice &&
+      filtersStore.selected.tags.includes(item.tags)
     );
   });
 });

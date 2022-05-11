@@ -3,15 +3,52 @@ import { onMounted, computed } from "vue";
 import { RouterView } from "vue-router";
 import { useInventoryStore } from "@/stores/inventory";
 import { useCartStore } from "@/stores/cart";
+import { useFiltersStore } from "./stores/filters";
 
 const inventoryStore = useInventoryStore();
 const cartStore = useCartStore();
+const filtersStore = useFiltersStore();
 
-onMounted(() => {
-  fetchItems();
+onMounted(async () => {
+  await fetchItems();
+  setPriceFilters();
+  setTagFilters();
 });
 
-const fetchItems = () => {
+const setPriceFilters = () => {
+  // Find the min and max price in the inventory
+  const findMinPrice = inventoryStore.items.reduce(function (prev, curr) {
+    return prev.price <= curr.price ? prev : curr;
+  }).price;
+
+  const findMaxPrice = inventoryStore.items.reduce(function (prev, curr) {
+    return prev.price >= curr.price ? prev : curr;
+  }).price;
+
+  // Set min and max price for sliders
+  filtersStore.minPrice = findMinPrice;
+  filtersStore.maxPrice = findMaxPrice;
+
+  // Filter for all prices by default
+  filtersStore.selected.minPrice = findMinPrice;
+  filtersStore.selected.maxPrice = findMaxPrice;
+};
+
+const setTagFilters = () => {
+  const allTags = inventoryStore.items.map((item) => item.tags);
+
+  const uniqueTags = [...new Set(allTags.flat())];
+
+  // Create a list of unique tags in the store
+  uniqueTags.forEach((tag) => {
+    filtersStore.tags.push(tag);
+  });
+
+  // Filter for all tags by default
+  filtersStore.selected.tags = filtersStore.tags;
+};
+
+const fetchItems = async () => {
   // Get URL of google spreadsheet. Refer to https://asbnotebook.com/fetch-google-spread-sheet-data-using-javascript/
   const sheetId = "1UTsgtcRiKEn4vjHSXIN7URM9x6n7aKJNWOgmsSKTBzE";
   const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
@@ -20,7 +57,7 @@ const fetchItems = () => {
   const url = `${base}&sheet=${sheetName}&tq=${query}`;
 
   // Fetch all of the rows from the spreadsheet (starting at row 2)
-  fetch(url)
+  await fetch(url)
     .then((res) => res.text())
     .then((resp) => {
       // Extract row data from the spreadsheet (starting at row 2)
