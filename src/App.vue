@@ -1,9 +1,15 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { useInventoryStore } from "@/stores/inventory";
+
+const inventoryStore = useInventoryStore();
 
 onMounted(async () => {
+  await fetchItems();
+});
+
+const fetchItems = () => {
   // Get URL of google spreadsheet. Refer to https://asbnotebook.com/fetch-google-spread-sheet-data-using-javascript/
   const sheetId = "1UTsgtcRiKEn4vjHSXIN7URM9x6n7aKJNWOgmsSKTBzE";
   const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
@@ -28,13 +34,11 @@ onMounted(async () => {
         });
         return obj;
       });
-      data.value = sheetData;
-    });
-});
 
-const data = ref(null);
-const loading = ref(true);
-const error = ref(null);
+      // Put the data into the store
+      inventoryStore.items = sheetData;
+    });
+};
 </script>
 
 <template>
@@ -49,9 +53,6 @@ const error = ref(null);
 
     <div class="wrapper">
       <!-- <HelloWorld msg="You did it!" /> -->
-      {{ data }}
-      {{ loading }}
-      {{ error }}
 
       <nav>
         <!-- <RouterLink to="/">Home</RouterLink> -->
