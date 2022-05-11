@@ -25,7 +25,9 @@ const item = computed(() => {
       <h1>{{ item.name }}</h1>
       <p class="price">${{ item.price }}</p>
       <p class="description">{{ item.description }}</p>
-      <p>{{ item.tags }}</p>
+      <p class="tags">
+        tags: <i>{{ item.tags }}</i>
+      </p>
 
       <CartButtons :id="item.id" />
     </div>
@@ -43,6 +45,7 @@ const item = computed(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  box-shadow: 5px 5px 0px var(--green-dark);
 }
 h1 {
   font-size: 3rem;
@@ -58,5 +61,9 @@ h1 {
 }
 .item-info {
   font-size: 1.5rem;
+}
+.tags {
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 </style>
