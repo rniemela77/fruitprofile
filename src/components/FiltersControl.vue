@@ -12,6 +12,16 @@ const filtersStore = useFiltersStore();
   <div class="filters">
     <div class="wrapper">
       <div class="filter-group">
+        <label for="textSearch"></label>
+        <input
+          type="text"
+          id="textSearch"
+          v-model="filtersStore.selected.keywords"
+        />
+        {{ filtersStore.selected.keywords }}
+      </div>
+
+      <div class="filter-group">
         <h1>Tags</h1>
         <div class="tag" v-for="tag in filtersStore.tags" :key="tag">
           <input

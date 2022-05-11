@@ -26,13 +26,28 @@ const itemIsInCart = (itemId) => {
 };
 
 const filteredItems = computed(() => {
-  return inventoryStore.items.filter((item) => {
+  // Filter items by price and tags
+  let items = inventoryStore.items.filter((item) => {
     return (
       item.price >= filtersStore.selected.minPrice &&
       item.price <= filtersStore.selected.maxPrice &&
       filtersStore.selected.tags.includes(item.tags)
     );
   });
+
+  // Filter items by keywords
+  if (filtersStore.selected.keywords) {
+    items = items.filter((item) => {
+      return (
+        item.name
+          .toLowerCase()
+          .indexOf(filtersStore.selected.keywords.toLowerCase()) != -1 ||
+        item.tags.indexOf(filtersStore.selected.keywords.toLowerCase()) != -1
+      );
+    });
+  }
+
+  return items;
 });
 </script>
 

@@ -13,6 +13,8 @@ export const useFiltersStore = defineStore({
       maxPrice: 99,
 
       tags: [],
+
+      keywords: "",
     },
   }),
 });
