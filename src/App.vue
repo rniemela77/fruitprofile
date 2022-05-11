@@ -8,8 +8,7 @@ const inventoryStore = useInventoryStore();
 const cartStore = useCartStore();
 
 onMounted(() => {
-  console.log("mounted");
-  fetchItems(); //todo fix this
+  fetchItems();
 });
 
 const fetchItems = () => {
