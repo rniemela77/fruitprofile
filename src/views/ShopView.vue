@@ -39,7 +39,7 @@ const filteredItems = computed(() => {
 
 <template>
   <main>
-    <FiltersControl />
+    <FiltersControl class="filters" />
     <div class="item-thumbs">
       <ItemThumb
         v-for="item in filteredItems"
@@ -52,8 +52,13 @@ const filteredItems = computed(() => {
 </template>
 
 <style scoped>
+main {
+  display: flex;
+}
 .item-thumbs {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .item-thumb {
   padding: 1rem;

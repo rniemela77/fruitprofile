@@ -35,6 +35,7 @@ const itemIsInCart = (itemId) => {
 
       <p>{{ props.item.tags }}</p>
     </RouterLink>
+
     <button
       v-if="!itemIsInCart(props.item.id)"
       @click="addToCart(props.item.id)"
@@ -46,7 +47,7 @@ const itemIsInCart = (itemId) => {
     <button
       v-if="itemIsInCart(props.item.id)"
       @click="removeFromCart(props.item.id)"
-      class="cart-button cart-button--filled"
+      class="cart-button cart-button--empty"
     >
       Remove from Cart
     </button>
@@ -62,19 +63,17 @@ const itemIsInCart = (itemId) => {
 .cart-button {
   width: 100%;
   padding: 0.5rem;
-  background: none;
+  background: var(--green-dark);
   border: none;
   font-weight: bold;
   transition: 0.25s;
-  border: 2px solid hsla(160, 100%, 37%, 1);
+  border: 2px solid var(--green-dark);
   color: white;
 }
-.cart-button--filled {
-  background: hsla(160, 100%, 37%, 1);
-  color: black;
+.cart-button--empty {
+  background: none;
 }
 .cart-button:hover {
-  background: rgb(0, 153, 102);
   cursor: pointer;
 }
 </style>
