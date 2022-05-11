@@ -63,7 +63,7 @@ const itemIsInCart = (itemId) => {
 .cart-button {
   width: 100%;
   padding: 0.5rem;
-  background: var(--green-dark);
+  background: var(--green-medium);
   border: none;
   font-weight: bold;
   transition: 0.25s;
@@ -71,7 +71,7 @@ const itemIsInCart = (itemId) => {
   color: white;
 }
 .cart-button--empty {
-  background: none;
+  background: var(--green-dark);
 }
 .cart-button:hover {
   cursor: pointer;
