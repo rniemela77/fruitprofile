@@ -1,6 +1,6 @@
 <script setup>
 import FiltersControl from "@/components/FiltersControl.vue";
-import ItemThumb from "@/components/ItemThumb.vue";
+import ItemList from "@/components/ItemList.vue";
 
 import { computed } from "vue";
 
@@ -40,27 +40,13 @@ const filteredItems = computed(() => {
 <template>
   <main>
     <FiltersControl class="filters" />
-    <div class="item-thumbs">
-      <ItemThumb
-        v-for="item in filteredItems"
-        :key="item.id"
-        :item="item"
-        class="item-thumb"
-      />
-    </div>
+
+    <ItemList :items="filteredItems" />
   </main>
 </template>
 
 <style scoped>
 main {
   display: flex;
-}
-.item-thumbs {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.item-thumb {
-  padding: 1rem;
 }
 </style>

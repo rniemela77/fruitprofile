@@ -87,11 +87,8 @@ const cartQuantity = computed(() => {
 <template>
   <header>
     <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
-
+      <h1>FruitShop</h1>
       <nav>
-        <!-- <RouterLink to="/">Home</RouterLink> -->
-        <!-- <RouterLink to="/about">About</RouterLink> -->
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/cart">Cart({{ cartQuantity }})</RouterLink>
       </nav>
