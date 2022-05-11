@@ -55,6 +55,7 @@ const fetchItems = () => {
       <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
+        {{ inventoryStore }}
         <!-- <RouterLink to="/">Home</RouterLink> -->
         <!-- <RouterLink to="/about">About</RouterLink> -->
       </nav>
