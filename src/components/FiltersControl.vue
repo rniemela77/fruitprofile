@@ -16,9 +16,9 @@ const filtersStore = useFiltersStore();
         <input
           type="text"
           id="textSearch"
+          placeholder="Search..."
           v-model="filtersStore.selected.keywords"
         />
-        {{ filtersStore.selected.keywords }}
       </div>
 
       <div class="filter-group">
@@ -33,7 +33,6 @@ const filtersStore = useFiltersStore();
           <label :for="tag">{{ tag }}</label>
         </div>
       </div>
-      {{ filtersStore.tags }}
 
       <div class="filter-group">
         <h1>Price</h1>
