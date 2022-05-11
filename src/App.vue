@@ -5,9 +5,9 @@ import { useInventoryStore } from "@/stores/inventory";
 
 const inventoryStore = useInventoryStore();
 
-onMounted(async () => {
+onMounted(() => {
   console.log("mounted");
-  await fetchItems(); //todo fix this
+  fetchItems(); //todo fix this
 });
 
 const fetchItems = () => {
