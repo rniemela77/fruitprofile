@@ -21,9 +21,9 @@ const fetchItems = () => {
   // Fetch all of the rows from the spreadsheet (starting at row 2)
   fetch(url)
     .then((res) => res.text())
-    .then((res) => {
+    .then((resp) => {
       // Extract row data from the spreadsheet (starting at row 2)
-      const jsonData = JSON.parse(res.substring(47).slice(0, -2));
+      const jsonData = JSON.parse(resp.substring(47).slice(0, -2));
       const cols = jsonData.table.cols;
       const rows = jsonData.table.rows;
 
@@ -56,7 +56,9 @@ const fetchItems = () => {
       <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
-        {{ inventoryStore }}
+        <div v-for="item in inventoryStore.items" :key="item.id">
+          {{ item }}
+        </div>
         <!-- <RouterLink to="/">Home</RouterLink> -->
         <!-- <RouterLink to="/about">About</RouterLink> -->
       </nav>
