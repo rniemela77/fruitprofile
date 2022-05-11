@@ -60,6 +60,9 @@ const itemIsInCart = (itemId) => {
   align-items: center;
   justify-content: space-between;
 }
+img {
+  object-fit: cover;
+}
 .cart-button {
   width: 100%;
   padding: 0.5rem;
