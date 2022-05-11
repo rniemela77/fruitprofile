@@ -75,6 +75,7 @@ const filtersStore = useFiltersStore();
 .filters {
   display: flex;
   flex-direction: column;
+  max-width: 200px;
 }
 .filter-group {
   display: flex;

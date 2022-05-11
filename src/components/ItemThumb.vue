@@ -32,8 +32,6 @@ const itemIsInCart = (itemId) => {
         <h2>{{ props.item.name }}</h2>
         <p>${{ props.item.price }}</p>
       </div>
-
-      <p>{{ props.item.tags }}</p>
     </RouterLink>
 
     <button
@@ -63,6 +61,9 @@ const itemIsInCart = (itemId) => {
 img {
   object-fit: cover;
 }
+h2 {
+  margin: 1rem 0;
+}
 .cart-button {
   width: 100%;
   padding: 0.5rem;
@@ -74,7 +75,11 @@ img {
   color: white;
 }
 .cart-button--empty {
-  background: var(--green-dark);
+  background: transparent;
+}
+.cart-button--empty:hover {
+  color: var(--red);
+  border-color: var(--red);
 }
 .cart-button:hover {
   cursor: pointer;

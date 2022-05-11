@@ -104,25 +104,13 @@ const cartQuantity = computed(() => {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
 }
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
+a {
   text-decoration: none;
   color: var(--green-medium);
-  transition: 0.4s;
+  transition: 0.25s;
 }
 
 @media (hover: hover) {

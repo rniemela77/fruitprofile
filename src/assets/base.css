@@ -2,7 +2,9 @@
 :root {
   --green-light: hsla(160, 100%, 50%, 1);
   --green-medium: rgb(0, 133, 88);
-  --green-dark: hsla(160, 100%, 20%, 1);
+  --green-dark: rgb(0, 70, 46);
+
+  --red: rgb(211, 79, 79);
 
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
