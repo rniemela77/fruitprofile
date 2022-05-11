@@ -1,8 +1,6 @@
 <script setup>
+import CartButtons from "@/components/CartButtons.vue";
 import { RouterLink } from "vue-router";
-
-import { useCartStore } from "@/stores/cart";
-const cartStore = useCartStore();
 
 const props = defineProps({
   item: {
@@ -10,18 +8,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-const addToCart = (itemId) => {
-  cartStore.addToCart(itemId);
-};
-
-const removeFromCart = (itemId) => {
-  cartStore.removeFromCart(itemId);
-};
-
-const itemIsInCart = (itemId) => {
-  return cartStore.itemIsInCart(itemId);
-};
 </script>
 
 <template>
@@ -34,21 +20,7 @@ const itemIsInCart = (itemId) => {
       </div>
     </RouterLink>
 
-    <button
-      v-if="!itemIsInCart(props.item.id)"
-      @click="addToCart(props.item.id)"
-      class="cart-button"
-    >
-      Add to Cart
-    </button>
-
-    <button
-      v-if="itemIsInCart(props.item.id)"
-      @click="removeFromCart(props.item.id)"
-      class="cart-button cart-button--empty"
-    >
-      Remove from Cart
-    </button>
+    <CartButtons :id="props.item.id" />
   </div>
 </template>
 
@@ -63,25 +35,5 @@ img {
 }
 h2 {
   margin: 1rem 0;
-}
-.cart-button {
-  width: 100%;
-  padding: 0.5rem;
-  background: var(--green-medium);
-  border: none;
-  font-weight: bold;
-  transition: 0.25s;
-  border: 2px solid var(--green-dark);
-  color: white;
-}
-.cart-button--empty {
-  background: transparent;
-}
-.cart-button--empty:hover {
-  color: var(--red);
-  border-color: var(--red);
-}
-.cart-button:hover {
-  cursor: pointer;
 }
 </style>
