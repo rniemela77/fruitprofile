@@ -1,13 +1,13 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { RouterLink, RouterView } from "vue-router";
+import { onMounted } from "vue";
+import { RouterView } from "vue-router";
 import { useInventoryStore } from "@/stores/inventory";
 
 const inventoryStore = useInventoryStore();
 
 onMounted(async () => {
   console.log("mounted");
-  await fetchItems();
+  await fetchItems(); //todo fix this
 });
 
 const fetchItems = () => {
@@ -44,27 +44,16 @@ const fetchItems = () => {
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
     <div class="wrapper">
       <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
-        <div v-for="item in inventoryStore.items" :key="item.id">
-          {{ item }}
-        </div>
         <!-- <RouterLink to="/">Home</RouterLink> -->
         <!-- <RouterLink to="/about">About</RouterLink> -->
+        <RouterLink to="/">Home</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 
