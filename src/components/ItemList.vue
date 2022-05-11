@@ -24,6 +24,7 @@ const props = defineProps({
 .item-thumbs {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .item-thumb {
   padding: 2rem;
