@@ -88,6 +88,9 @@ const filtersStore = useFiltersStore();
 .filter-group input[type="text"] {
   padding: 0.25rem;
   font-size: 16px;
+  border: 2px solid var(--green-medium);
+  background: none;
+  color: white;
 }
 .tags {
   display: flex;
